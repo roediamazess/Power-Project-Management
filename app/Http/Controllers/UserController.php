@@ -58,8 +58,8 @@ class UserController extends Controller
             'password' => 'required|string|min:8',
             'tier' => 'required|string|in:' . implode(',', User::getTierOptions()),
             'role' => 'required|string|in:' . implode(',', User::getRoleOptions()),
-            'start_work' => 'required|date',
-            'birthday' => 'required|date',
+            'start_work' => 'nullable|date',
+            'birthday' => 'nullable|date',
             'status' => 'required|string|in:' . implode(',', User::getStatusOptions()),
         ]);
 
@@ -99,8 +99,8 @@ class UserController extends Controller
             'password' => 'nullable|string|min:8',
             'tier' => 'required|string|in:' . implode(',', User::getTierOptions()),
             'role' => 'required|string|in:' . implode(',', User::getRoleOptions()),
-            'start_work' => 'required|date',
-            'birthday' => 'required|date',
+            'start_work' => 'nullable|date',
+            'birthday' => 'nullable|date',
             'status' => 'required|string|in:' . implode(',', User::getStatusOptions()),
         ]);
 

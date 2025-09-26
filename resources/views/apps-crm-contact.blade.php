@@ -235,17 +235,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="start_work" class="form-label">Start Work Date <span class="text-danger">*</span></label>
+                                    <label for="start_work" class="form-label">Start Work Date</label>
                                     <input type="date" class="form-control @error('start_work') is-invalid @enderror" 
-                                        id="start_work" name="start_work" value="{{ old('start_work') }}" required>
+                                        id="start_work" name="start_work" value="{{ old('start_work') }}">
                                     @error('start_work')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="birthday" class="form-label">Birthday <span class="text-danger">*</span></label>
+                                    <label for="birthday" class="form-label">Birthday</label>
                                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" 
-                                        id="birthday" name="birthday" value="{{ old('birthday') }}" required>
+                                        id="birthday" name="birthday" value="{{ old('birthday') }}">
                                     @error('birthday')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
