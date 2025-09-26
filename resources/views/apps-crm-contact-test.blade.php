@@ -58,7 +58,7 @@
                                             <img src="assets/images/avatar/avatar-{{ (($user['id'] ?? 1) % 10) + 1 }}.jpg" alt="Avatar Image"
                                                 class="avatar-md rounded-pill">
                                             <div>
-                                                <h6 class="mb-0 fw-medium fs-13">{{ $user['name'] ?? 'N/A' }}</h6>
+                                                <h6 class="mb-0 fw-medium fs-13">{{ $user['username'] ?? 'N/A' }}</h6>
                                             </div>
                                         </td>
                                         <td><i class="bi bi-envelope me-2 text-muted"></i>{{ $user['email'] ?? 'N/A' }}</td>
@@ -237,17 +237,17 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="start_work" class="form-label">Start Work Date <span class="text-danger">*</span></label>
+                                    <label for="start_work" class="form-label">Start Work Date</label>
                                     <input type="date" class="form-control @error('start_work') is-invalid @enderror" 
-                                        id="start_work" name="start_work" value="{{ old('start_work') }}" required>
+                                        id="start_work" name="start_work" value="{{ old('start_work') }}">
                                     @error('start_work')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="birthday" class="form-label">Birthday <span class="text-danger">*</span></label>
+                                    <label for="birthday" class="form-label">Birthday</label>
                                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" 
-                                        id="birthday" name="birthday" value="{{ old('birthday') }}" required>
+                                        id="birthday" name="birthday" value="{{ old('birthday') }}">
                                     @error('birthday')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -314,12 +314,12 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="edit_start_work" class="form-label">Start Work Date <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="edit_start_work" name="start_work" required>
+                                    <label for="edit_start_work" class="form-label">Start Work Date</label>
+                                    <input type="date" class="form-control" id="edit_start_work" name="start_work">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="edit_birthday" class="form-label">Birthday <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="edit_birthday" name="birthday" required>
+                                    <label for="edit_birthday" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="edit_birthday" name="birthday">
                                 </div>
                             </div>
                         </div>

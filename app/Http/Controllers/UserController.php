@@ -14,19 +14,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        // Very simple approach - just return empty array first
-        $users = [];
-        
-        try {
-            // Try to get users from database
-            $users = \App\Models\User::all()->toArray();
-        } catch (\Exception $e) {
-            // If any error, use empty array
-            $users = [];
-        }
-        
-        // Return test view first
-        return view('apps-crm-contact-test', ['users' => $users]);
+        $users = User::query()->orderByDesc('id')->get();
+        return view('apps-crm-contact', ['users' => $users]);
     }
 
     /**
@@ -38,10 +27,11 @@ class UserController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * API: Get data for editing the specified resource.
      */
-    public function edit(User $user)
+    public function apiEdit($id)
     {
+        $user = User::findOrFail($id);
         return response()->json([
             'user' => $user
         ]);
@@ -53,9 +43,10 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
+            'username' => 'required|string|max:255|unique:users',
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
+            'password' => 'required|string|min:8|confirmed',
             'tier' => 'required|string|in:' . implode(',', User::getTierOptions()),
             'role' => 'required|string|in:' . implode(',', User::getRoleOptions()),
             'start_work' => 'nullable|date',
@@ -63,11 +54,21 @@ class UserController extends Controller
             'status' => 'required|string|in:' . implode(',', User::getStatusOptions()),
         ]);
 
-        $validated['password'] = Hash::make($validated['password']);
+        try {
+            // Hash password (hashed cast will skip rehashing if already hashed)
+            $validated['password'] = Hash::make($validated['password']);
 
-        User::create($validated);
+            $user = User::create($validated);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully!');
+            \Log::info('User created successfully', ['id' => $user->id, 'email' => $user->email]);
+            return redirect()->route('users.index')->with('success', 'User created successfully!');
+        } catch (\Throwable $e) {
+            \Log::error('User create failed', [
+                'message' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return back()->withErrors(['error' => 'Failed to create user. Check logs.'])->withInput();
+        }
     }
 
     /**
@@ -94,6 +95,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validated = $request->validate([
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($user->id)],
             'name' => 'required|string|max:255',
             'email' => ['required', 'string', 'email', 'max:255', Rule::unique('users')->ignore($user->id)],
             'password' => 'nullable|string|min:8',

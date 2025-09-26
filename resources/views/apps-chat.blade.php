@@ -25,7 +25,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <h6 class="text-truncate mb-0"><a class="text-reset" data-bs-toggle="offcanvas"
                                                     href="#userProfileCanvasExample"
-                                                    aria-controls="userProfileCanvasExample">@auth{{ auth()->user()->name }}@else Guest @endauth</a></h6>
+                                                    aria-controls="userProfileCanvasExample">@auth{{ auth()->user()->username }}@else Guest @endauth</a></h6>
                                             <p class="text-truncate text-muted fs-14 mb-0 userStatus">
                                                 <small>Available</small></p>
                                         </div>

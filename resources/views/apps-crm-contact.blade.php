@@ -38,7 +38,7 @@
                             <table class="table text-nowrap align-middle mb-0">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <th scope="col">Username</th>
                                         <th scope="col">User Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Tier</th>
@@ -53,7 +53,7 @@
                                     @if(isset($users) && count($users) > 0)
                                     @foreach($users as $user)
                                     <tr>
-                                        <th scope="row">{{ $user['id'] ?? 'N/A' }}</th>
+                                        <td><strong>{{ $user['username'] ?? 'N/A' }}</strong></td>
                                         <td class="d-flex align-items-center gap-3">
                                             <img src="assets/images/avatar/avatar-{{ (($user['id'] ?? 1) % 10) + 1 }}.jpg" alt="Avatar Image"
                                                 class="avatar-md rounded-pill">
@@ -142,19 +142,19 @@
                                     @endif
                                 </tbody>
                             </table>
-                        </div>
+                                            </div>
                         
                         @if(isset($users) && count($users) > 0)
                         <div class="d-flex flex-wrap gap-3 align-items-center m-5">
                             <div class="fw-medium"> 
                                 Showing {{ count($users) }} Users
-                            </div>
-                        </div>
+                                            </div>
+                                                </div>
                         @endif
-                    </div>
-                </div>
-            </div>
-        </div>
+                                            </div>
+                                            </div>
+                                            </div>
+                                            </div>
 
         <!-- User Create Modal -->
         <div class="modal fade" id="createUserModal" data-bs-keyboard="false" tabindex="-1"
@@ -165,12 +165,21 @@
                         <h5 class="modal-title" id="createUserModalLabel">Add New User</h5>
                         <button type="button" class="btn-close icon-btn-sm" data-bs-dismiss="modal" aria-label="Close">
                             <i class="ri-close-large-line fw-semibold"></i>
-                        </button>
-                    </div>
+                                                </button>
+                                            </div>
                     <form action="{{ route('users.store') }}" method="POST">
                         @csrf
                         <div class="modal-body">
                             <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control @error('username') is-invalid @enderror" 
+                                        id="username" name="username" value="{{ old('username') }}"
+                                        placeholder="Enter username" autocomplete="username" required>
+                                    @error('username')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
@@ -179,7 +188,7 @@
                                     @error('name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror" 
@@ -188,16 +197,22 @@
                                     @error('email')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                                </div>
                                 <div class="col-md-6">
                                     <label for="password" class="form-label">Password <span class="text-danger">*</span></label>
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" 
-                                        id="password" name="password"
+                                        id="password" name="password" autocomplete="new-password"
                                         placeholder="Enter password (min 8 characters)" required>
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                            </div>
+                                <div class="col-md-6">
+                                    <label for="password_confirmation" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <input type="password" class="form-control" id="password_confirmation" 
+                                        name="password_confirmation" autocomplete="new-password"
+                                        placeholder="Confirm password" required>
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="tier" class="form-label">Tier <span class="text-danger">*</span></label>
                                     <select class="form-select @error('tier') is-invalid @enderror" id="tier" name="tier" required>
@@ -209,7 +224,7 @@
                                     @error('tier')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
                                     <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
@@ -221,7 +236,7 @@
                                     @error('role')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
                                     <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
@@ -233,7 +248,7 @@
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                                </div>
                                 <div class="col-md-6">
                                     <label for="start_work" class="form-label">Start Work Date</label>
                                     <input type="date" class="form-control @error('start_work') is-invalid @enderror" 
@@ -241,7 +256,7 @@
                                     @error('start_work')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
+                                            </div>
                                 <div class="col-md-6">
                                     <label for="birthday" class="form-label">Birthday</label>
                                     <input type="date" class="form-control @error('birthday') is-invalid @enderror" 
@@ -249,17 +264,17 @@
                                     @error('birthday')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                </div>
-                            </div>
-                        </div>
+                                            </div>
+                                            </div>
+                                            </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Create User</button>
-                        </div>
+                                                </div>
                     </form>
-                </div>
-            </div>
-        </div>
+                                            </div>
+                                            </div>
+                                            </div>
 
         <!-- User View Modal -->
         <div class="modal fade" id="viewUserModal" data-bs-keyboard="false" tabindex="-1"
@@ -270,13 +285,13 @@
                         <h5 class="modal-title" id="viewUserModalLabel">User Details</h5>
                         <button type="button" class="btn-close icon-btn-sm" data-bs-dismiss="modal" aria-label="Close">
                             <i class="ri-close-large-line fw-semibold"></i>
-                        </button>
-                    </div>
+                                                </button>
+                                            </div>
                     <div class="modal-body">
                         <div id="userDetails">
                             <!-- User details will be loaded here -->
+                            </div>
                         </div>
-                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                     </div>
@@ -298,12 +313,16 @@
                     <form id="editUserForm" method="POST">
                         @csrf
                         @method('PUT')
-                        <div class="modal-body">
+                    <div class="modal-body">
                             <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="edit_username" class="form-label">Username <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="edit_username" name="username" required>
+                                        </div>
                                 <div class="col-md-6">
                                     <label for="edit_name" class="form-label">Full Name <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control" id="edit_name" name="name" required>
-                                </div>
+                                    </div>
                                 <div class="col-md-6">
                                     <label for="edit_email" class="form-label">Email <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control" id="edit_email" name="email" required>
@@ -311,7 +330,7 @@
                                 <div class="col-md-6">
                                     <label for="edit_password" class="form-label">Password</label>
                                     <input type="password" class="form-control" id="edit_password" name="password"
-                                        placeholder="Leave blank to keep current password">
+                                        placeholder="Leave blank to keep current password" autocomplete="current-password">
                                 </div>
                                 <div class="col-md-6">
                                     <label for="edit_tier" class="form-label">Tier <span class="text-danger">*</span></label>
@@ -338,19 +357,19 @@
                                     </select>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="edit_start_work" class="form-label">Start Work Date <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="edit_start_work" name="start_work" required>
+                                    <label for="edit_start_work" class="form-label">Start Work Date</label>
+                                    <input type="date" class="form-control" id="edit_start_work" name="start_work">
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="edit_birthday" class="form-label">Birthday <span class="text-danger">*</span></label>
-                                    <input type="date" class="form-control" id="edit_birthday" name="birthday" required>
+                                    <label for="edit_birthday" class="form-label">Birthday</label>
+                                    <input type="date" class="form-control" id="edit_birthday" name="birthday">
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
+                    </div>
+                    <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
                             <button type="submit" class="btn btn-primary">Update User</button>
-                        </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -363,8 +382,13 @@
     <script>
         // View User Function
         function viewUser(userId) {
-            fetch(`/api/users/${userId}`)
-                .then(response => response.json())
+            fetch(`/test-user-simple/${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     const user = data.user;
                     const userDetails = `
@@ -372,6 +396,10 @@
                             <div class="col-12 text-center mb-3">
                                 <img src="assets/images/avatar/avatar-${(userId % 10) + 1}.jpg" alt="Avatar" 
                                      class="img-fluid rounded-circle h-100px w-100px object-fit-cover">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold">Username</label>
+                                <p class="form-control-plaintext">${user.username}</p>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label fw-semibold">Full Name</label>
@@ -418,17 +446,23 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error loading user details');
+                    alert('Error loading user details: ' + error.message);
                 });
         }
 
         // Edit User Function
         function editUser(userId) {
-            fetch(`/api/users/${userId}/edit`)
-                .then(response => response.json())
+            fetch(`/test-user-simple/${userId}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
                 .then(data => {
                     const user = data.user;
                     document.getElementById('editUserForm').action = `/users/${userId}`;
+                    document.getElementById('edit_username').value = user.username;
                     document.getElementById('edit_name').value = user.name;
                     document.getElementById('edit_email').value = user.email;
                     document.getElementById('edit_tier').value = user.tier;
@@ -440,7 +474,7 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Error loading user data');
+                    alert('Error loading user data: ' + error.message);
                 });
         }
     </script>

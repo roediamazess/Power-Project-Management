@@ -298,7 +298,7 @@
                         </span>
                         <div class="pe-2">
                             @auth
-                                <span class="d-block mb-0 fs-13 fw-semibold">{{ auth()->user()->name }}</span>
+                                <span class="d-block mb-0 fs-13 fw-semibold">{{ auth()->user()->username }}</span>
                                 <span class="d-block mb-0 fs-12 text-muted">{{ auth()->user()->email }}</span>
                             @else
                                 <span class="d-block mb-0 fs-13 fw-semibold">Guest</span>
@@ -311,7 +311,7 @@
                             <img src="/assets/images/avatar/avatar-10.jpg" alt="Avatar Image" class="avatar-md">
                             <div>
                                 <a href="javascript:void(0)">
-                                    <h6 class="mb-0 lh-base">@auth{{ auth()->user()->name }}@else Guest @endauth</h6>
+                                    <h6 class="mb-0 lh-base">@auth{{ auth()->user()->username }}@else Guest @endauth</h6>
                                 </a>
                                 <p class="mb-0 fs-13 text-muted">@auth{{ auth()->user()->email }}@else — @endauth</p>
                             </div>
@@ -323,7 +323,7 @@
                         </ul>
                         <ul class="list-unstyled mb-1 border-bottom pb-1">
                             <li><a class="dropdown-item" href="/pages-timeline"><i class="bi bi-clock me-1"></i> ChangLog</a></li>
-                            <li><a class="dropdown-item" href="/apps-crm-contact"><i class="bi bi-people me-1"></i> Team</a></li>
+                            <li><a class="dropdown-item" href="/apps-team-contact"><i class="bi bi-people me-1"></i> Team</a></li>
                             <li><a class="dropdown-item" href="/pages-faqs"><i class="bi bi-headset me-1"></i> Support</a></li>
                         </ul>
                         <ul class="list-unstyled mb-0">

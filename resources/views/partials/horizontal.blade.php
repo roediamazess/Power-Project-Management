@@ -246,17 +246,17 @@
                                 <a href="javascript:void(0)">Team</a>
                             </li>
                             <li class="pe-slide-item">
-                                <a href="apps-crm-contact" class="pe-nav-link">
+                                <a href="apps-team-contact" class="pe-nav-link">
                                     Contact
                                 </a>
                             </li>
                             <li class="pe-slide-item">
-                                <a href="apps-crm-lead" class="pe-nav-link">
+                                <a href="apps-team-lead" class="pe-nav-link">
                                     Lead
                                 </a>
                             </li>
                             <li class="pe-slide-item">
-                                <a href="apps-crm-deal" class="pe-nav-link">
+                                <a href="apps-team-deal" class="pe-nav-link">
                                     Deal
                                 </a>
                             </li>
