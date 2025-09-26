@@ -202,9 +202,10 @@
                                     <label for="tier" class="form-label">Tier <span class="text-danger">*</span></label>
                                     <select class="form-select @error('tier') is-invalid @enderror" id="tier" name="tier" required>
                                         <option value="">Select Tier</option>
-                                        @foreach(\App\Models\User::getTierOptions() as $tier)
-                                            <option value="{{ $tier }}" {{ old('tier') == $tier ? 'selected' : '' }}>{{ $tier }}</option>
-                                        @endforeach
+                                        <option value="New Born" {{ old('tier') == 'New Born' ? 'selected' : '' }}>New Born</option>
+                                        <option value="Tier 1" {{ old('tier') == 'Tier 1' ? 'selected' : '' }}>Tier 1</option>
+                                        <option value="Tier 2" {{ old('tier') == 'Tier 2' ? 'selected' : '' }}>Tier 2</option>
+                                        <option value="Tier 3" {{ old('tier') == 'Tier 3' ? 'selected' : '' }}>Tier 3</option>
                                     </select>
                                     @error('tier')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -214,9 +215,11 @@
                                     <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
                                     <select class="form-select @error('role') is-invalid @enderror" id="role" name="role" required>
                                         <option value="">Select Role</option>
-                                        @foreach(\App\Models\User::getRoleOptions() as $role)
-                                            <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>{{ $role }}</option>
-                                        @endforeach
+                                        <option value="Administrator" {{ old('role') == 'Administrator' ? 'selected' : '' }}>Administrator</option>
+                                        <option value="Management" {{ old('role') == 'Management' ? 'selected' : '' }}>Management</option>
+                                        <option value="Admin Officer" {{ old('role') == 'Admin Officer' ? 'selected' : '' }}>Admin Officer</option>
+                                        <option value="User" {{ old('role') == 'User' ? 'selected' : '' }}>User</option>
+                                        <option value="Client" {{ old('role') == 'Client' ? 'selected' : '' }}>Client</option>
                                     </select>
                                     @error('role')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -226,9 +229,8 @@
                                     <label for="status" class="form-label">Status <span class="text-danger">*</span></label>
                                     <select class="form-select @error('status') is-invalid @enderror" id="status" name="status" required>
                                         <option value="">Select Status</option>
-                                        @foreach(\App\Models\User::getStatusOptions() as $status)
-                                            <option value="{{ $status }}" {{ old('status') == $status ? 'selected' : '' }}>{{ $status }}</option>
-                                        @endforeach
+                                        <option value="Active" {{ old('status') == 'Active' ? 'selected' : '' }}>Active</option>
+                                        <option value="Inactive" {{ old('status') == 'Inactive' ? 'selected' : '' }}>Inactive</option>
                                     </select>
                                     @error('status')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -261,29 +263,6 @@
             </div>
         </div>
 
-        <!-- User View Modal -->
-        <div class="modal fade" id="viewUserModal" data-bs-keyboard="false" tabindex="-1"
-            aria-labelledby="viewUserModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="viewUserModalLabel">User Details</h5>
-                        <button type="button" class="btn-close icon-btn-sm" data-bs-dismiss="modal" aria-label="Close">
-                            <i class="ri-close-large-line fw-semibold"></i>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="userDetails">
-                            <!-- User details will be loaded here -->
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- User Edit Modal -->
         <div class="modal fade" id="editUserModal" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="editUserModalLabel" aria-hidden="true">
@@ -295,9 +274,9 @@
                             <i class="ri-close-large-line fw-semibold"></i>
                         </button>
                     </div>
-                    <form id="editUserForm" method="POST">
+                    <form id="editUserForm" action="#" method="POST">
                         @csrf
-                        @method('PUT')
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="modal-body">
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -309,32 +288,29 @@
                                     <input type="email" class="form-control" id="edit_email" name="email" required>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="edit_password" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="edit_password" name="password"
-                                        placeholder="Leave blank to keep current password">
-                                </div>
-                                <div class="col-md-6">
                                     <label for="edit_tier" class="form-label">Tier <span class="text-danger">*</span></label>
                                     <select class="form-select" id="edit_tier" name="tier" required>
-                                        @foreach(\App\Models\User::getTierOptions() as $tier)
-                                            <option value="{{ $tier }}">{{ $tier }}</option>
-                                        @endforeach
+                                        <option value="New Born">New Born</option>
+                                        <option value="Tier 1">Tier 1</option>
+                                        <option value="Tier 2">Tier 2</option>
+                                        <option value="Tier 3">Tier 3</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="edit_role" class="form-label">Role <span class="text-danger">*</span></label>
                                     <select class="form-select" id="edit_role" name="role" required>
-                                        @foreach(\App\Models\User::getRoleOptions() as $role)
-                                            <option value="{{ $role }}">{{ $role }}</option>
-                                        @endforeach
+                                        <option value="Administrator">Administrator</option>
+                                        <option value="Management">Management</option>
+                                        <option value="Admin Officer">Admin Officer</option>
+                                        <option value="User">User</option>
+                                        <option value="Client">Client</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="edit_status" class="form-label">Status <span class="text-danger">*</span></label>
                                     <select class="form-select" id="edit_status" name="status" required>
-                                        @foreach(\App\Models\User::getStatusOptions() as $status)
-                                            <option value="{{ $status }}">{{ $status }}</option>
-                                        @endforeach
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
                                     </select>
                                 </div>
                                 <div class="col-md-6">
@@ -349,7 +325,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Update User</button>
+                            <button type="submit" class="btn btn-primary">Save Changes</button>
                         </div>
                     </form>
                 </div>
@@ -361,87 +337,38 @@
 
 @section('js')
     <script>
+        window.usersList = @json($users ?? []);
+
         // View User Function
         function viewUser(userId) {
-            fetch(`/api/users/${userId}`)
-                .then(response => response.json())
-                .then(data => {
-                    const user = data.user;
-                    const userDetails = `
-                        <div class="row g-3">
-                            <div class="col-12 text-center mb-3">
-                                <img src="assets/images/avatar/avatar-${(userId % 10) + 1}.jpg" alt="Avatar" 
-                                     class="img-fluid rounded-circle h-100px w-100px object-fit-cover">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Full Name</label>
-                                <p class="form-control-plaintext">${user.name}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Email</label>
-                                <p class="form-control-plaintext">${user.email}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Tier</label>
-                                <p class="form-control-plaintext">
-                                    <span class="badge bg-secondary-subtle text-secondary">${user.tier}</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Role</label>
-                                <p class="form-control-plaintext">
-                                    <span class="badge bg-primary-subtle text-primary">${user.role}</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Status</label>
-                                <p class="form-control-plaintext">
-                                    <span class="badge bg-${user.status === 'Active' ? 'success' : 'danger'}-subtle text-${user.status === 'Active' ? 'success' : 'danger'}">${user.status}</span>
-                                </p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Start Work</label>
-                                <p class="form-control-plaintext">${user.start_work ? new Date(user.start_work).toLocaleDateString() : '—'}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Birthday</label>
-                                <p class="form-control-plaintext">${user.birthday ? new Date(user.birthday).toLocaleDateString() : '—'}</p>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label fw-semibold">Created At</label>
-                                <p class="form-control-plaintext">${new Date(user.created_at).toLocaleString()}</p>
-                            </div>
-                        </div>
-                    `;
-                    document.getElementById('userDetails').innerHTML = userDetails;
-                    new bootstrap.Modal(document.getElementById('viewUserModal')).show();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error loading user details');
-                });
+            alert('View user: ' + userId);
         }
 
         // Edit User Function
         function editUser(userId) {
-            fetch(`/api/users/${userId}/edit`)
-                .then(response => response.json())
-                .then(data => {
-                    const user = data.user;
-                    document.getElementById('editUserForm').action = `/users/${userId}`;
-                    document.getElementById('edit_name').value = user.name;
-                    document.getElementById('edit_email').value = user.email;
-                    document.getElementById('edit_tier').value = user.tier;
-                    document.getElementById('edit_role').value = user.role;
-                    document.getElementById('edit_status').value = user.status;
-                    document.getElementById('edit_start_work').value = user.start_work ? user.start_work.split('T')[0] : '';
-                    document.getElementById('edit_birthday').value = user.birthday ? user.birthday.split('T')[0] : '';
-                    new bootstrap.Modal(document.getElementById('editUserModal')).show();
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error loading user data');
-                });
+            var user = (window.usersList || []).find(function(u){ return Number(u.id) === Number(userId); });
+            if (!user) { return; }
+
+            // Fill form fields
+            document.getElementById('edit_name').value = user.name || '';
+            document.getElementById('edit_email').value = user.email || '';
+            document.getElementById('edit_tier').value = user.tier || 'New Born';
+            document.getElementById('edit_role').value = user.role || 'User';
+            document.getElementById('edit_status').value = user.status || 'Active';
+            if (user.start_work) {
+                try { document.getElementById('edit_start_work').value = new Date(user.start_work).toISOString().slice(0,10); } catch(e) { document.getElementById('edit_start_work').value = ''; }
+            } else { document.getElementById('edit_start_work').value = ''; }
+            if (user.birthday) {
+                try { document.getElementById('edit_birthday').value = new Date(user.birthday).toISOString().slice(0,10); } catch(e) { document.getElementById('edit_birthday').value = ''; }
+            } else { document.getElementById('edit_birthday').value = ''; }
+
+            // Set action to resource route /users/{id}
+            var form = document.getElementById('editUserForm');
+            form.action = '/users/' + userId;
+
+            // Show modal
+            var modal = new bootstrap.Modal(document.getElementById('editUserModal'));
+            modal.show();
         }
     </script>
 @endsection

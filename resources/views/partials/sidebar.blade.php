@@ -235,13 +235,13 @@
             </li>
             <li class="pe-slide pe-has-sub">
                 <a href="#collapseCRM" class="pe-nav-link" data-bs-toggle="collapse" aria-expanded="false" aria-controls="collapseCRM">
-                    <i class="bi bi-binoculars pe-nav-icon"></i>
-                    <span class="pe-nav-content">CRM</span>
+                    <i class="bi bi-people pe-nav-icon"></i>
+                    <span class="pe-nav-content">Team</span>
                     <i class="ri-arrow-down-s-line pe-nav-arrow"></i>
                 </a>
                 <ul class="pe-slide-menu collapse" id="collapseCRM">
                     <li class="slide pe-nav-content1">
-                        <a href="javascript:void(0)">CRM</a>
+                        <a href="javascript:void(0)">Team</a>
                     </li>
                     <li class="pe-slide-item">
                         <a href="apps-crm-contact" class="pe-nav-link">

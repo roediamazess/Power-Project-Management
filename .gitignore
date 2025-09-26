@@ -21,3 +21,9 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Local backups
+backup/
+backup_exclude.txt
+create_backup.ps1
+
